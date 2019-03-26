@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+}
+body,html{
+  width:100%;
+  height:100%;
+}
+.el-menu{
+  border-right:solid 0px #e6e6e6!important;
+}
+#listContain h2{
+  display:inline-block;
+}
+#listContain .commentary{
+  color:gray;
+}
+.allTypeBox{
+  padding: 10px 10px 0 10px;
+  /* border-bottom:1px solid #ccc; */
+}
+.box .allTypeBox:last-child{
+  padding-bottom:10px;
+}
+.clear{
+  clear:both;
+}
+
+.el-button+.el-button{
+  /*margin-left:0!important; 全局按钮都需要用 !important  来覆盖此样式，建议用到者写在 scoped 或者特殊类名 comment by Shriley*/
+}
+.el-message-box .el-button+.el-button{
+  /*margin-left:10px !important;*/
+}
+.el-button{
+  /*margin-top:5px!important; 全局按钮都需要用 !important  来覆盖此样式，建议用到者写在 scoped 或者特殊类名 comment by Shriley*/
+}
+.box{
+  width:100%;
+  height:100%;
+  border:1px solid #ccc;
+  border-radius: 10px;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  -o-border-radius:10px;
+  margin-top:20px;
+}
+
+/*
+  dialog
+*/
+.el-dialog{
+  border-radius: 10px!important;
+  -webkit-border-radius:10px!important;
+  -moz-border-radius:10px!important;
+  -o-border-radius:10px!important;
+}
+.el-dialog .el-form{
+  width: 400px;
+  margin-left:50px;
+}
+
+.el-loading-mask{
+  background:rgba(0, 0, 0, 0.1)!important;
+}
+
+/*
+  table
+*/
+.el-table__header thead tr{
+  background:#eef1f6!important;
+}
+.el-table__header thead tr th{
+  background:#eef1f6!important;
+  padding:6px 0!important;
+}
+.el-table__header{
+  background:#eef1f6!important;
+}
+.el-pager li{
+  border:1px solid #ccc;
+  border-right:none;
+}
+.el-pager li:first-child{
+  border-radius:3px 0 0 3px;
+  -webkit-border-radius:3px 0 0 3px;
+  -moz-border-radius:3px 0 0 3px;
+  -o-border-radius:3px 0 0 3px;
+}
+.el-pager li:last-child{
+  border-right:1px solid #ccc;
+  border-radius:0 3px 3px 0;
+  -webkit-border-radius:0 3px 3px 0;
+  -moz-border-radius:0 3px 3px 0;
+  -o-border-radius:0 3px 3px 0;
+}
+.el-pager li.active {
+  color:white!important;
+  background:#409EFF;
+}
+.el-pagination{
+  margin-top:10px;
+  text-align: center;
+}
+
+/*
+*dialog
+*/
+.el-form-item{
+  margin-top:-5px;
+}
+/**
+  icon 的图标
+*/
+.getMenu{
+  background:url(../icon/getMenu.png) no-repeat 8px 5px;
+  border:none;
+  background-size: 30px 30px;
+  text-indent:30px;
+  height:30px;
+  width:40px;
+  cursor:pointer;
+  outline:none;
+}
+.postMenu{
+  background:url(../icon/postMenu.png) no-repeat 8px 5px;
+  border:none;
+  background-size: 30px 30px;
+  text-indent:30px;
+  height:30px;
+  width:40px;
+  cursor:pointer;
+  outline:none;
+}
