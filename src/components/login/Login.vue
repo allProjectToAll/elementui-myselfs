@@ -4,16 +4,16 @@
         <div class="ms-title">{{$t('message.ManagementSystem')}} </div>
         <el-form label-position="right" label-width="80px" ref="ruleForm" :rules="rules" :model="ruleForm" class="form">
           <el-form-item :label="$t('message.User')" prop="username">
-            <el-input @keyup.enter.native="submitForm('ruleForm')" v-model="ruleForm.username"  :placeholder="$t('message.enterUser')" type="username" style="width:260px;"></el-input>
+            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.username"  :placeholder="$t('message.enterUser')" type="username" style="width:260px;"></el-input>
           </el-form-item>
           <el-form-item :label="$t('message.Password')" prop="password">
-            <el-input @keyup.enter.native="submitForm('ruleForm')" v-model="ruleForm.password"  :placeholder="$t('message.EnterPassw')" type="password" style="width:260px;"></el-input>
+            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.password"  :placeholder="$t('message.EnterPassw')" type="password" style="width:260px;"></el-input>
           </el-form-item>
           <el-form-item :label="$t('message.VerificationCode')" prop="gugoRul">
-            <el-input @keyup.enter.native="submitForm('ruleForm')" v-model="ruleForm.gugoRul" :placeholder="$t('message.enterVerificationCode')" type="gugoRul" style="width:260px;"></el-input>
+            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.gugoRul" :placeholder="$t('message.enterVerificationCode')" type="gugoRul" style="width:260px;"></el-input>
           </el-form-item>
           <div class="login-btn">
-              <el-button type="primary" @click="submitForm('ruleForm')" 
+              <el-button type="primary" @click="submitForm2('ruleForm')" 
               :element-loading-text="$t('message.HardLoading')" 
               v-loading.fullscreen.lock="fullscreenLoading">{{$t('message.login')}} </el-button>
           </div>
@@ -29,9 +29,6 @@ export default {
       if (value.trim() === "") {
         callback(new Error(this.$t("message.userNotEmpty")));
       } else {
-        // if (this.ruleForm.username !== '') {
-        //   this.$refs.ruleForm.validateField('username');
-        // }
         callback();
       }
     };
@@ -52,9 +49,9 @@ export default {
 
     return {
       ruleForm: {
-        username: "",
-        password: "",
-        gugoRul: ""
+        username: "admin",
+        password: "123456",
+        gugoRul: "123456"
       },
       fullscreenLoading: false,
       msg: "这是一个登录页面",
@@ -76,45 +73,30 @@ export default {
     this.$i18n.locale = localStorage.getItem("langular") || "cn";
   },
   methods: {
-    submitForm(formName) {
-      console.log("正在登录");
-      let that = this;
-      this.$refs[formName].validate(valid => {
+    submitForm2(formName){
+       this.$refs[formName].validate(valid => {
         if (valid) {
-          //正则验证成功
-          that.fullscreenLoading = true;
-          let par = {
-            account: this.ruleForm.username.trim(),
-            password: this.ruleForm.password.trim(),
-            otpCode: this.ruleForm.gugoRul.trim()
-          };
+          const params = {
+            uname: this.ruleForm.username,
+            pwd: this.ruleForm.password
+          }
+          this.api.post("/auth/login",params).then((res) => {
+            console.log(res)
+               console.log("登录成功");
+              this.fullscreenLoading = false;
+              this.$store.commit("setToken", { token: res.data.token });
 
-          this.postAjax(
-            "/Main/Login",
-            par,
-            function(res) {
-              console.log("登录成功");
-              that.fullscreenLoading = false;
-              that.$store.commit("setToken", { token: res.body.value });
-
-              sessionStorage.setItem("token", res.body.value);
+              sessionStorage.setItem("token",  res.data.token);
               sessionStorage.setItem("isLogin", true);
-              localStorage.setItem("userName", that.ruleForm.username);
+              localStorage.setItem("userName", this.ruleForm.username);
               // localStorage.setItem("isLogin",true);
-              that.$router.push({ path: "/index" });
-            },
-            function(res) {
-              that.fullscreenLoading = false;
+              this.$router.push({ path: "/index" });
+          }).catch(() => {
+              this.fullscreenLoading = false;
               console.log("路径错误");
-            }
-          );
-
-          // this.$router.push({path:"/index"});
-        } else {
-          console.log("error submit!!");
-          return false;
+          });
         }
-      });
+       })
     }
   }
 };

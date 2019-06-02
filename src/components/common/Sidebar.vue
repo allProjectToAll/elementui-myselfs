@@ -1,9 +1,9 @@
 <template>
 <EasyScrollbar :barOption="scrollBar">
     <div id="wrapper" :style="{height: windowHeight + 'px' }">
-        <el-menu :default-active="onRoutes" unique-opened class="el-menu-vertical-demo" background-color="#324157" text-color="#bfcbd9"
-            @open="handleOpen" @close="handleClose" :collapse="storeLeftMenu" hide-timeout >
-            <el-submenu :key="index" :index="item.moduleKey" v-for="(item, index) in BtnArr">
+        <el-menu :default-active="onRoutes" unique-opened class="el-menu-vertical-demo"
+         background-color="#324157" text-color="#bfcbd9" @open="handleOpen" @close="handleClose" :collapse="storeLeftMenu" hide-timeout >
+            <!-- <el-submenu :key="index" :index="item.moduleKey" v-for="(item, index) in BtnArr">
                 <template slot="title">
                     <i :class="item.icon?item.icon:'el-icon-location'"></i>
                     <span>{{item.name}}</span>
@@ -11,7 +11,39 @@
                 <el-menu-item-group :key="indexS" v-for="(itemS, indexS) in item.children">
                     <el-menu-item :index="returnRouter(itemS.moduleUrl)"  @click="$router.push(itemS.moduleUrl)">{{itemS.name}}</el-menu-item>
                 </el-menu-item-group>
+            </el-submenu> -->
+            <el-submenu index="1">
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span>导航一</span>
+              </template>
+              <el-menu-item-group>
+                <template slot="title">分组一</template>
+                <el-menu-item index="1-1">选项1</el-menu-item>
+                <el-menu-item index="1-2">选项2</el-menu-item>
+              </el-menu-item-group>
+              <el-menu-item-group title="分组2">
+                <el-menu-item index="1-3">选项3</el-menu-item>
+              </el-menu-item-group>
+              <el-submenu index="1-4">
+                <template slot="title">选项4</template>
+                <el-menu-item index="1-4-1">选项1</el-menu-item>
+              </el-submenu>
             </el-submenu>
+
+            
+            <el-menu-item index="2">
+              <i class="el-icon-menu"></i>
+              <span slot="title">导航二</span>
+            </el-menu-item>
+            <el-menu-item index="3" disabled>
+              <i class="el-icon-document"></i>
+              <span slot="title">导航三</span>
+            </el-menu-item>
+            <el-menu-item index="4">
+              <i class="el-icon-setting"></i>
+              <span slot="title">导航四</span>
+            </el-menu-item>
 
         </el-menu>
     </div>
@@ -64,64 +96,18 @@ export default {
     },
     getList() {
       let that = this;
-      this.postAjax(
-        "/Main/GetModules",
-        null,
-        function(res) {
-          // console.log(res.body.value,666);
-          that.list = res.body.value;
-          that.getArrayList();
-        },
-        function(res) {
-          console.log("路径错误");
-        }
-      );
+      // this.postAjax("/Main/GetModules",null,function(res) {
+      //     that.list = res.body.value;
+      //     that.getArrayList();
+      //   },
+      //   function(res) {
+      //     console.log("路径错误");
+      //   }
+      // );
     },
     getArrayList() {
-      let tree = [];
-      for (var i = this.list.length - 1; i >= 0; i--) {
-        var item = this.list[i];
-        tree.push({
-          id: item.id,
-          icon: item.icon,
-          isUsable: item.isUsable,
-          moduleKey: item.moduleKey,
-          moduleUrl: item.moduleUrl,
-          name: item.name,
-          sortIndex: item.sortIndex,
-          parentId: item.parentId,
-          children: []
-        });
-      }
+      
 
-      var treeDic = {};
-      for (var i = tree.length - 1; i >= 0; i--) {
-        var treeNode = tree[i];
-        treeDic[treeNode.id] = treeNode;
-      }
-      for (var i = tree.length - 1; i >= 0; i--) {
-        var treeNode = tree[i];
-        if (treeNode.parentId != 0 && treeDic[treeNode.parentId]) {
-          treeDic[treeNode.parentId].children.push(treeNode);
-        }
-      }
-
-      let ListArrays = [];
-      for (let i = 0; i < tree.length; i++) {
-        if (tree[i].parentId == 0) {
-          ListArrays.push(tree[i]);
-        }
-      }
-      ListArrays = ListArrays.sort(this.compare("sortIndex"));
-      for (var i = 0; i < ListArrays.length; i++) {
-        if (ListArrays[i].children) {
-          ListArrays[i].children = ListArrays[i].children.sort(
-            this.compare("sortIndex")
-          );
-        } else {
-          console.log("没有子集");
-        }
-      }
       this.listLoading = false;
       this.BtnArr = ListArrays;
     },

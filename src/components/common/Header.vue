@@ -145,20 +145,20 @@ export default {
             let that=this;
             this.$refs[formName].validate((valid) => {
                 if (valid) {//正则验证成功
-                    that.fullscreenLoading = true;
-                    let par = {
-                        "code": this.dialogForm.GoogleCode,
-                        "password": this.dialogForm.NewPassword
-                    }
-                    this.postAjax("/Main/ChangePassword",par,function(res){
-                         that.fullscreenLoading = false;
-                        that.openErr(that.$t("message.ServiceSuccess"),2);
-                        that.dialog = false;
+                    // that.fullscreenLoading = true;
+                    // let par = {
+                    //     "code": this.dialogForm.GoogleCode,
+                    //     "password": this.dialogForm.NewPassword
+                    // }
+                    // this.postAjax("/Main/ChangePassword",par,function(res){
+                    //      that.fullscreenLoading = false;
+                    //     that.openErr(that.$t("message.ServiceSuccess"),2);
+                    //     that.dialog = false;
 
-                    },function(res){
-                        console.log("路径错误");
-                        that.fullscreenLoading = false;
-                    })
+                    // },function(res){
+                    //     console.log("路径错误");
+                    //     that.fullscreenLoading = false;
+                    // })
                 } else {
                     console.log('error submit!!');
                     return false;

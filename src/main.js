@@ -3,7 +3,7 @@ import Vue from 'vue'
 import store from './store';
 import App from './App';
 import router from './router';
-import VueResource from 'vue-resource';
+// import VueResource from 'vue-resource';
 
 //element
 import ElementUI from 'element-ui';
@@ -13,11 +13,6 @@ import i18n from './i18n/i18n';
 
 //公共样式
 import '../static/css/index.css'
-//自定义多语言 自定义的函数**********
-// import language from '../static/language/language.js'
-// Vue.use(language);
-//自定义变量
-// import Time from '../static/js/index.js'
 // Vue.use(Time);
 //自定义函数
 import errTitle from '../static/js/index.js'
@@ -25,13 +20,17 @@ Vue.use(errTitle);
 
 import VueQuillEditor from 'vue-quill-editor'
 // require styles
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+// import 'quill/dist/quill.core.css'
+// import 'quill/dist/quill.snow.css'
+// import 'quill/dist/quill.bubble.css'
+
 Vue.use(VueQuillEditor, /* { default global options } */)
 
+import api from './components/libs/api'
+Vue.prototype.api = api;
+
 //生成二维码
-import QRCode from 'qrcode'
+// import QRCode from 'qrcode'
 
 
 //滚动轴
@@ -41,7 +40,7 @@ import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;
 
 Vue.use(EasyScroll);
-Vue.use(VueResource);
+// Vue.use(VueResource);
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
@@ -58,7 +57,7 @@ router.beforeEach((to, from, next) => {
   }
 
 })
-
+//得到年月日
 Vue.filter('dateTime', function(value) {
   if(!value) {
     return '';

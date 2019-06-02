@@ -201,23 +201,10 @@ export default {
   },
   created: function() {
     //初始化加载
-    // this.$http.get("http:/").then(function(res){alert(res.body);},function (res) {});
-    // this.$http.post("http:",{name:"zhangsan"},{emulateJSON:true}).then( function (res) {},function (res) {});
-
     var par = {
       count: 10, //10
       start: 0 //(1-1)*10
     };
-    this.$http
-      .jsonp("https://api.douban.com/v2/movie/in_theaters", { params: par })
-      .then(
-        res => {
-          console.log(res);
-        },
-        function(res) {
-          alert(222);
-        }
-      );
 
     this.windowHeight = $("body").height();
     window.onresize = () => {

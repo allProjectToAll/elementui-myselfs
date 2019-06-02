@@ -13,7 +13,7 @@ export default {
   methods:{
   },
   created(){
-    this.$store.dispatch('getLangList',this)
+    // this.$store.dispatch('getLangList',this)
   }
 }
 </script>

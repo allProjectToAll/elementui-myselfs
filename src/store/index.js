@@ -10,8 +10,8 @@ const store = new Vuex.Store({
         leftMenuOpen:false,//menu页面ul是否展开
         elSideBarSync:false, //menu组件外index页面的盒子是否展开
       },
-      token:sessionStorage.getItem("token")||0,
-      url: process.env.NODE_ENV === 'development' ? 'http://192.168.125.231:8884' : 'https://erpapi.azex.io',
+      token:sessionStorage.getItem("token")|| 0,
+      url: process.env.NODE_ENV === 'development' ? 'http://119.96.168.93:8084/api/v1' : 'http://119.96.168.93:8084/api/v1',
       languageList:[],
       languageObj:{},
       languageCodeObj:{},
@@ -44,37 +44,32 @@ const store = new Vuex.Store({
         state.token = res.token;
       },
       setLanguageList(state,data){
-        state.languageList = data;
-        state.languageObj = convertLangToObj(data);
-        state.languageCodeObj = convertLangToCodeObj(data);
+        // state.languageList = data;
+        // state.languageObj = convertLangToObj(data);
+        // state.languageCodeObj = convertLangToCodeObj(data);
       }
 
     },
     actions:{
-      async getLangList({commit},that){
-        await  that.postAjax('/Lang/GetOptions', {}, (res) => {
-          commit('setLanguageList', res.body.value);
-        })
-        return store.state.languageList;
-      },
+      
     }
 })
 
-function convertLangToObj(list){
-  let obj = {};
-  list.forEach((lang) => {
-    obj[`${lang.value}`] = lang;
-  })
-  return obj;
-}
+// function convertLangToObj(list){
+//   let obj = {};
+//   list.forEach((lang) => {
+//     obj[`${lang.value}`] = lang;
+//   })
+//   return obj;
+// }
 
-function convertLangToCodeObj(list){
-  let obj = {};
-  list.forEach((lang) => {
-    obj[`${lang.code}`] = lang;
-  })
-  return obj;
-}
+// function convertLangToCodeObj(list){
+//   let obj = {};
+//   list.forEach((lang) => {
+//     obj[`${lang.code}`] = lang;
+//   })
+//   return obj;
+// }
 
 
 export default store;
