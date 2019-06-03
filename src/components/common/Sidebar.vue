@@ -136,5 +136,8 @@ ul li ul li.el-menu-item {
 }
 .threeIcon{
   margin-top:-2px;
+  margin-right:10px;
+  font-size:18px;
+  margin-left:4px;
 }
 </style>

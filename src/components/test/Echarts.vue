@@ -10,7 +10,9 @@
 export default {
   data () {
     return {
-      msg: '所有效果'
+      msg: '所有效果',
+      myChart:null,
+      myChart2:null,
     }
   },
   created: function(){
@@ -23,10 +25,10 @@ export default {
 
     this.echarts2("echarts2");
 
-    window.onresize = function () {
-            myChart.resize();
-            myChart2.resize();
-	    }
+    // window.onresize = function () {
+    //         this.myChart.resize();
+    //         this.myChart2.resize();
+	//     }
 
   },
   computed:{// 计算属性的 getter
@@ -34,7 +36,7 @@ export default {
   },
   methods:{
     echarts(id,title,titleY,signXAxis,signYAxis,type,danwei,bg){
-        var myChart = this.$echarts.init(document.getElementById(id));
+        this.myChart = this.$echarts.init(document.getElementById(id));
         var option = {
 	        		title: {
 					        text: title
@@ -87,12 +89,12 @@ export default {
 	                data: signYAxis
 	            }]
 			  };
-       myChart.setOption(option);
+       this.myChart.setOption(option);
 
 
     },
     echarts2(id){
-          var myChart2 = this.$echarts.init(document.getElementById(id));
+          this.myChart2 = this.$echarts.init(document.getElementById(id));
         var option2 = {
             title: {
                 text: 'Beijing AQI'
@@ -174,7 +176,7 @@ export default {
                 }
             }
         }
-        myChart2.setOption(option2);
+        this.myChart2.setOption(option2);
 
 
     }

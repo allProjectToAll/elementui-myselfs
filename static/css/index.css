@@ -9,12 +9,6 @@ body,html{
 .el-menu{
   border-right:solid 0px #e6e6e6!important;
 }
-#listContain h2{
-  display:inline-block;
-}
-#listContain .commentary{
-  color:gray;
-}
 .allTypeBox{
   padding: 10px 10px 0 10px;
   /* border-bottom:1px solid #ccc; */
@@ -26,15 +20,6 @@ body,html{
   clear:both;
 }
 
-.el-button+.el-button{
-  /*margin-left:0!important; 全局按钮都需要用 !important  来覆盖此样式，建议用到者写在 scoped 或者特殊类名 comment by Shriley*/
-}
-.el-message-box .el-button+.el-button{
-  /*margin-left:10px !important;*/
-}
-.el-button{
-  /*margin-top:5px!important; 全局按钮都需要用 !important  来覆盖此样式，建议用到者写在 scoped 或者特殊类名 comment by Shriley*/
-}
 .box{
   width:100%;
   height:100%;
@@ -46,23 +31,6 @@ body,html{
   margin-top:20px;
 }
 
-/*
-  dialog
-*/
-.el-dialog{
-  border-radius: 10px!important;
-  -webkit-border-radius:10px!important;
-  -moz-border-radius:10px!important;
-  -o-border-radius:10px!important;
-}
-.el-dialog .el-form{
-  width: 400px;
-  margin-left:50px;
-}
-
-.el-loading-mask{
-  background:rgba(0, 0, 0, 0.1)!important;
-}
 
 /*
   table

@@ -281,21 +281,35 @@ const Menu = [
                 path:"/btn2",
                 childMenu:[
                     {
-                        title:"一级菜单",
+                        title:"404页面",
                         icon:"el-icon-s-release",
-                        name:"/btn21",
-                        path:"/btn21",
+                        name:"err",
+                        path:"/err",
                         childMenu:[]
                     }
                 ]
+            },
+            {
+                title:"二级菜单",
+                icon:"el-icon-s-release",
+                name:"btn3",
+                path:"/btn3",
+                childMenu:[]
+            },
+            {
+                title:"二级菜单",
+                icon:"el-icon-s-release",
+                name:"btn4",
+                path:"/btn4",
+                childMenu:[]
             }
         ]
     },
     {
-        title:"表格",
+        title:"图表",
         icon:"el-icon-s-release",
-        name:"table",
-        path:"/table",
+        name:"echarts",
+        path:"/echarts",
         childMenu:[]
     }
 ]

@@ -3,8 +3,6 @@ import Vue from 'vue'
 import store from './store';
 import App from './App';
 import router from './router';
-// import VueResource from 'vue-resource';
-
 //element
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -13,26 +11,21 @@ import i18n from './i18n/i18n';
 
 //公共样式
 import '../static/css/index.css'
-// Vue.use(Time);
 //自定义函数
 import errTitle from '../static/js/index.js'
 Vue.use(errTitle);
 
 import VueQuillEditor from 'vue-quill-editor'
-// require styles
-// import 'quill/dist/quill.core.css'
-// import 'quill/dist/quill.snow.css'
-// import 'quill/dist/quill.bubble.css'
 
 Vue.use(VueQuillEditor, /* { default global options } */)
 
-import api from './components/libs/api'
+import api from '@/libs/api'
 Vue.prototype.api = api;
 
 //生成二维码
 // import QRCode from 'qrcode'
 
-import jsonJs from '@/components/libs/json'
+import jsonJs from '@/libs/json'
 Vue.prototype.jsonJs = jsonJs;
 
 

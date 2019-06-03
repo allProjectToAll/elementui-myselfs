@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import Sidebar from './Sidebar'
-import Header from './Header'
+import Sidebar from './common/Sidebar'
+import Header from './common/Header'
 
 
 export default {
