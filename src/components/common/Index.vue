@@ -35,7 +35,7 @@ export default {
   },
   created: function(){ //初始化加载
     //初始化多语言，为了使表格的页脚不出错
-    this.$i18n.locale = localStorage.getItem("langular")||"cn";
+    // this.$i18n.locale = localStorage.getItem("langular")||"cn";
   },
   computed:{// 计算属性的 getter
     elSideBarSync: function () {

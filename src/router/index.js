@@ -24,9 +24,9 @@ export default new Router({
   routes: [
     { path: '*', redirect: '/404', hidden: true },
     { path: '/404', component: Err },
-    { path: '/login',name:'登录', component: Login},
+    { path: '/login',name:'login', component: Login},
     { path: '/', component: Login },
-    { path: '/test', component: Test },
+    { path: '/test',name:'test', component: Test },
     {
       path: '/index',
       // name:'导航',

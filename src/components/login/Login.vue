@@ -1,21 +1,21 @@
 <template>
   <div class="LoginPage">
     <div class="login-wrap">
-        <div class="ms-title">{{$t('message.ManagementSystem')}} </div>
+        <div class="ms-title">后台管理系统 </div>
         <el-form label-position="right" label-width="80px" ref="ruleForm" :rules="rules" :model="ruleForm" class="form">
-          <el-form-item :label="$t('message.User')" prop="username">
-            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.username"  :placeholder="$t('message.enterUser')" type="username" style="width:260px;"></el-input>
+          <el-form-item label="用户名" prop="username">
+            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.username"  placeholder="请输入用户名" type="username" style="width:260px;"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('message.Password')" prop="password">
-            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.password"  :placeholder="$t('message.EnterPassw')" type="password" style="width:260px;"></el-input>
+          <el-form-item label="密码" prop="password">
+            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.password"  placeholder="请输入密码" type="password" style="width:260px;"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('message.VerificationCode')" prop="gugoRul">
-            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.gugoRul" :placeholder="$t('message.enterVerificationCode')" type="gugoRul" style="width:260px;"></el-input>
+          <el-form-item label="验证码" prop="gugoRul">
+            <el-input @keyup.enter.native="submitForm2('ruleForm')" v-model="ruleForm.gugoRul" placeholder="谷歌身份验证码" type="gugoRul" style="width:260px;"></el-input>
           </el-form-item>
           <div class="login-btn">
               <el-button type="primary" @click="submitForm2('ruleForm')" 
-              :element-loading-text="$t('message.HardLoading')" 
-              v-loading.fullscreen.lock="fullscreenLoading">{{$t('message.login')}} </el-button>
+              element-loading-text="拼命加载中" 
+              v-loading.fullscreen.lock="fullscreenLoading">登录 </el-button>
           </div>
         </el-form>
       </div>
@@ -27,21 +27,21 @@ export default {
   data() {
     var validateUsername = (rule, value, callback) => {
       if (value.trim() === "") {
-        callback(new Error(this.$t("message.userNotEmpty")));
+        callback(new Error("用户名不能为空"));
       } else {
         callback();
       }
     };
     var validatePass = (rule, value, callback) => {
       if (value.trim() === "") {
-        callback(new Error(this.$t("message.passwordNotEmpty")));
+        callback(new Error("密码不能为空"));
       } else {
         callback();
       }
     };
     var validategugo = (rule, value, callback) => {
       if (value.trim() === "") {
-        callback(new Error(this.$t("message.chooremNotEmpty")));
+        callback(new Error("谷歌验证码不能为空"));
       } else {
         callback();
       }
@@ -70,7 +70,7 @@ export default {
     // localStorage.setItem("isLogin",true);
     console.log(this.$store.getters.getToken);
     //初始化多语言，为了使表格的页脚不出错
-    this.$i18n.locale = localStorage.getItem("langular") || "cn";
+    // this.$i18n.locale = localStorage.getItem("langular") || "cn";
   },
   methods: {
     submitForm2(formName){

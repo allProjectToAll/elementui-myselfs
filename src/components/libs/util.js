@@ -2,6 +2,7 @@ import axios from 'axios';
 // import VueCookies from 'vue-cookie'
 import store from '@/store'
 import { Message,MessageBox } from 'element-ui';
+import router from '@/router';
 // import { getToken } from '@/utils/auth'
 // import Code from '@/utils/code'
 
@@ -40,13 +41,14 @@ util.ajax.interceptors.response.use(
     }else{
       if(res.data.code == Code.UNAUTHEN || res.data.code == Code.SESSION_TIMOUT){
         //处理登录相关的错误
-        MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出',
-          {confirmButtonText: '重新登录',cancelButtonText: '取消',type: 'warning'}).then(() => {
-          // store.dispatch('FedLogOut').then(() => {
-          //   location.reload();// 为了重新实例化vue-router对象 避免bug
-          // });
-
-        })
+        // MessageBox.confirm('登录时间过长，请重新登录！', '确定登出',{confirmButtonText: '重新登录',cancelButtonText: '取消',type: 'warning'}).then(() => {
+        //     router.push({ name: "login" });
+        // })
+        this.$confirm('登录时间过长，请重新登录！', '提示', {confirmButtonText: '确定',cancelButtonText: '取消',type: 'warning'}).then(() => {
+            router.push({ name: "login" });
+        }).catch(() => {
+          
+        });
       }else{
         //其它错误弹出错误信息
         Message({ message: res.data.msg, type: 'error', duration: 5000});

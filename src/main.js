@@ -32,6 +32,9 @@ Vue.prototype.api = api;
 //生成二维码
 // import QRCode from 'qrcode'
 
+import jsonJs from '@/components/libs/json'
+Vue.prototype.jsonJs = jsonJs;
+
 
 //滚动轴
 import EasyScroll from "easyscroll";

@@ -11,42 +11,42 @@
             </div>
             <el-dropdown-menu class="user-dropdown" slot="dropdown">
                 <el-dropdown-item >
-                        <span @click="ResetPassword">{{ $t("message.ResetPassword") }}</span>
+                        <span @click="ResetPassword">修改密码</span>
                 </el-dropdown-item>
                 <el-dropdown-item divided class="langularControl">
-                    <span>{{ $t("message.SwitchLanguage") }}></span>
+                    <span>切换语言</span>
                     <div class="langularBox">
-                        <div @click="toChinese">{{ $t("message.Chinese") }}</div>
-                        <div  @click="toEnglish">{{ $t("message.Englishs") }}</div>
+                        <div @click="toChinese">中文</div>
+                        <div  @click="toEnglish">英文</div>
                     </div>
                 </el-dropdown-item>
                 <el-dropdown-item divided >
-                    <span @click="ExitLogon">{{ $t("message.ExitLogon") }}</span>
+                    <span @click="ExitLogon">退出登录</span>
                 </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
 
 
-        <el-dialog :title="$t('message.ResetPassword')" :visible.sync="dialog" width="500px">
+        <el-dialog title="修改密码" :visible.sync="dialog" width="500px">
             <el-form ref="addModelRuleForm" class="small-space" :rules="rules" :model="dialogForm" label-position="left"
              label-width="100px">
-                <el-form-item :label="$t('message.GoogleCode')" prop="GoogleCode">
-                    <el-input v-model="dialogForm.GoogleCode" :placeholder="$t('message.PleaseEnterGGCode')"></el-input>
+                <el-form-item label="谷歌验证码" prop="GoogleCode">
+                    <el-input v-model="dialogForm.GoogleCode" placeholder="请输入谷歌验证码"></el-input>
                 </el-form-item>
-                <el-form-item :label="$t('message.NewPassword')" prop="NewPassword">
-                    <el-input type="password" v-model="dialogForm.NewPassword" :placeholder="$t('message.PleaseEnterGGCode')"></el-input>
+                <el-form-item label="新密码" prop="NewPassword">
+                    <el-input type="password" v-model="dialogForm.NewPassword" placeholder="请输入谷歌验证码"></el-input>
                 </el-form-item>
-                <el-form-item :label="$t('message.ReNewPassword')" prop="ReNewPassword">
-                    <el-input type="password" v-model="dialogForm.ReNewPassword" :placeholder="$t('message.PleaseEnterNewPassword')"></el-input>
+                <el-form-item label="确认新密码" prop="ReNewPassword">
+                    <el-input type="password" v-model="dialogForm.ReNewPassword" placeholder="请输入新密码"></el-input>
                 </el-form-item>
                 
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="dialog = false">{{ $t("message.Cancel") }} </el-button>
+                <el-button @click="dialog = false">取消 </el-button>
                 <el-button type="primary" 
-                :element-loading-text="$t('message.Inprocessing')" 
+                element-loading-text="正在处理中..." 
                 v-loading.fullscreen.lock="fullscreenLoading"
-                 @click="passwordChange('addModelRuleForm')">{{ $t("message.Revise") }} </el-button>
+                 @click="passwordChange('addModelRuleForm')">修改 </el-button>
             </div>
         </el-dialog>
 
@@ -60,7 +60,7 @@ export default {
     data() {
             var passWord = (rule, value, callback) => {
                 if (value != this.dialogForm.NewPassword) {
-                    callback(new Error(this.$t("message.PasswordDiffer")));
+                    callback(new Error("两次输入密码不一致"));
                 } else {
                     callback(); 
                 }
@@ -78,13 +78,13 @@ export default {
             nickname: localStorage.getItem("userName")||"username",
             rules:{
                 GoogleCode: [
-                    {  required: true,message:this.$t("message.PleaseEnterGGCode"), trigger: 'blur'}
+                    {  required: true,message:"请输入谷歌验证码", trigger: 'blur'}
                 ],
                 NewPassword: [
-                    {  required: true,message:this.$t("message.PleaseEnterNewPassword"), trigger: 'blur'}
+                    {  required: true,message:"请输入新密码", trigger: 'blur'}
                 ],
                 ReNewPassword: [
-                    {  required: true,message:this.$t("message.PleaseEnterNewPassword"), trigger: 'blur'},
+                    {  required: true,message:"请输入新密码", trigger: 'blur'},
                     { validator: passWord, trigger: 'blur' },
                 ],
             }
@@ -102,7 +102,7 @@ export default {
         
     },
     methods:{
-        menuChange:function(el){
+        menuChange(el){
             if(el.target.className=="getMenu"){
                 this.menuicon="postMenu";
             }else{
@@ -111,20 +111,16 @@ export default {
             this.$store.commit("leftMenuChange");
         },
         toChinese(){
-            this.$i18n.locale = 'cn'; 
-            localStorage.setItem("langular","cn");
+            // this.$i18n.locale = 'cn'; 
+            // localStorage.setItem("langular","cn");
         },
         toEnglish(){
-            this.$i18n.locale = 'en'; 
-            localStorage.setItem("langular","en");
+            // this.$i18n.locale = 'en'; 
+            // localStorage.setItem("langular","en");
         },
         ExitLogon(){
             let that = this;
-            this.$confirm(that.$t("message.DeterminExitLogon")+'?', that.$t("message.Title"), {
-                confirmButtonText: that.$t("message.MakeSure"),
-                cancelButtonText: that.$t("message.Cancel"),
-                type: 'warning'
-            }).then(() => {
+            this.$confirm("确定退出登录", "提示", {confirmButtonText: "确定",cancelButtonText: "取消",type: 'warning'}).then(() => {
                 // localStorage.setItem("isLogin",false);
                 sessionStorage.setItem("isLogin",false);
                 localStorage.setItem("userName","");
