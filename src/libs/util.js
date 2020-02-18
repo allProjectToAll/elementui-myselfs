@@ -9,7 +9,7 @@ import router from '@/router';
 let util = {};
 console.log(process.env.NODE_ENV ,"process.env.NODE_ENV ")
 //https://jsonplaceholder.typicode.com
-const ajaxUrl = process.env.NODE_ENV === 'development' ? "http://119.96.168.93:8084/api/v1":"http://119.96.168.93:8084/api/v1";//"":"";//
+const ajaxUrl = process.env.NODE_ENV === 'development' ? "https://www.loanera.cn/api/v1":"https://www.loanera.cn/api/v1";//"":"";//
 
 util.ajax = axios.create({
   baseURL: ajaxUrl,
