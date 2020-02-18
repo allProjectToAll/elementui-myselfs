@@ -44,12 +44,12 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     next();
   }else{
-    // if(sessionStorage.getItem("isLogin")=="true"){
-    //   console.log("sessionStorage.getItem(isLogin)==true");
-    //   next();
-    // }else{
-    //   next({ path: '/login' });
-    // }
+    if(sessionStorage.getItem("isLogin")=="true"){
+      console.log("sessionStorage.getItem(isLogin)==true");
+      next();
+    }else{
+      next({ path: '/login' });
+    }
     next();
   }
 
